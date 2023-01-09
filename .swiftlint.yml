@@ -1,0 +1,125 @@
+disabled_rules: # rule identifiers to exclude from running
+  - trailing_whitespace
+  - todo
+  - void_return
+  - identifier_name
+  - discouraged_direct_init
+  - cyclomatic_complexity
+  - inert_defer
+  - class_delegate_protocol
+  - nesting
+  - inclusive_language
+opt_in_rules: # some rules are only opt-in
+  - array_init
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - contains_over_first_not_nil
+  - empty_count
+  - explicit_init
+  - extension_access_modifier
+  - fatal_error_message
+  - first_where
+  - joined_default_parameter
+  - literal_expression_end_indentation
+  - nimble_operator
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - private_action
+  - private_outlet
+  - private_over_fileprivate
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - redundant_nil_coalescing
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+
+# Find all the available rules by running:
+# swiftlint rules
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
+  - explicit_self
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+line_length:
+  warning: 200
+  ignores_comments: true
+  ignores_function_declarations: true
+
+# they can set both implicitly with an array
+type_body_length:
+  - 300 # warning
+  - 400 # error
+
+# or they can set both explicitly
+file_length:
+  warning: 500
+  error: 1200
+
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 50
+    error: 60
+  excluded:
+    - iPhone # excluded via string
+    - Day # excluded via string
+    - Web # excluded via string
+
+identifier_name:
+  min_length: # only min_length
+    error: 1 # only error
+  excluded: # excluded via string array
+    - id
+
+colon:
+  apply_to_dictionaries: false
+
+number_separator:
+  minimum_length: 5
+
+reporter: xcode # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)
+
+custom_rules:
+  rule_dupa:
+    name: "Oddupiacz"
+    regex: "[d,D]upa"
+    message: "Used word is very bad. Use Ala, Koala or another pretty one."
+    severity: error
+    
+  rule_custom_void_return:
+    included: ".*\\.swift"
+    name: "Void return"
+    regex: "->\\s?\\(?Void\\)?"
+    message: "Prefer `-> ()` over `-> Void`."
+    
+  rule_is_empty_negation:
+    included: ".*\\.swift"
+    name: "isEmpty negation"
+    regex: " *\t*![a-zA-Z.?!()\" \t\n]{1,}.isEmpty"
+    message: "Prefer `.isNotEmpty` over negation `.isEmpty`."
+    
+  rule_is_not_empty_negation:
+    included: ".*\\.swift"
+    name: "isNotEmpty negation"
+    regex: " *\t*![a-zA-Z.?!()\" \t\n]{1,}.isNotEmpty"
+    message: "Prefer `.isEmpty` over negation `.isNotEmpty`."
